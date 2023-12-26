@@ -6,8 +6,17 @@ const fetchUser = async () => {
 };
 
 export const useUserQuery = () => {
-	return useQuery({ queryKey: ['user'], queryFn: fetchUser });
+	// refetchOnWindowFocus : 다른 브라우저 탭으로 이동했다가 다시 해당 탭으로 넘어왔을 때, 재패칭 안 되도록 false처리 (기본값 true)
+	// refetchOnMount : 해당 컴포넌트 재 마운트 시 refetch 안 하도록 false 처리 (기본값 true)
+	return useQuery({ queryKey: ['user'], queryFn: fetchUser, refetchOnWindowFocus: false, refetchOnMount: false, gcTime: 1000 * 5 });
 };
+
+/*
+  fresh : 서버 데이터를 최신 상태로 인식하는 상태 
+  stale : 서버 데이터를 오래된 데이터로 인식하는 상태 
+  inactive : 서버 데이터가 더이상 해당 컴포넌트에서 활용되지 않는 상태 
+  gcTime : inactive가 되자마자, gcTime에 등록한 시간 값이 소진되면서 해당 시간이 지나고나면 garbageCollector가 해당 메모리를 제거함. 
+*/
 
 /*
   react-query 개발자 툴에서 확인할 수 있는 상태값 5가지에 대한 개념 정리 
