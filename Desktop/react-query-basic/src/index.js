@@ -1,20 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
+import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
-
-/*
-  < 기존의 redux 기반으로 비동기 데이터를 전역 state로 저장할 때 발생하던 문제점 >
-  1. 애초에 redux의 태생 자체가 비동기 데이터를 관리하기 위한 라이브러리는 아니었기 때문에, 전반적인 코드 시스템이 비효율적인(과한) 감이 있었음. 
-  2. 비동기 데이터 (server side data) 는 클라이언트 쪽에 제어권이 없으므로 해당 비동기 데이터를 정적인 상태로 저장해서 재활용한다는 것 자체가 프로그래밍적으로 적절하지 않았음. 
-  3. 1초단위로 수시로 서버 쪽에서 변경되는 데이터를 클라이언트 쪽에서 전역으로 저장해버리면, 1초만 지나도 모든 컴포넌트에 연결되어있는 비동기 데이터들은 이미 적절하지 않은 예전 데이터(최신 상태가 아닌) 를 활용하게 되는 문제가 발생함. 
-  4. 설사 전역으로 저장했다고 하더라도, 비동기 데이터의 변경 요청을 했다가 다시 원래 데이터를 요청을 해도, 똑같은 데이터임에도 기존 redux 시스템에서는 해당 데이터가 같은 데이터인지 구분할 방법이 없으므로 (다른 데이터로 여기고) 똑같은 데이터를 또 다시 fetching하는 문제점이 발생하게 됨. 
-  
-
-  < 최근 전역 데이터 관리 트렌드 >
-  1. client-side-data 만 context api를 활용한 경량의 커스텀 훅으로 전역 관리 (굳이 무거운 redux라는 시스템을 사용하지 않음.)
-  2. server-side-data (비동기 데이터)는 굳이 전역에 저장하지 않고, 서버 데이터가 필요할 때마다 요청함. 그런데 이때 요청하는 데이터가 이전에 사용되었던 이력이 있는 같은 데이터면, re-fetching 요청을 하는 것이 아닌 캐시에 등록되어 있는 값을 재활용함. (react-query, SWR)
-
-*/
+root.render(
+	<BrowserRouter>
+		<App />
+	</BrowserRouter>
+);
