@@ -15,9 +15,9 @@ function App() {
 			<div className='App'>
 				<Menu />
 				<Routes>
-					<Route exact path='/' element={<Main />} />
-					<Route exact path='/info' element={<UserInfo />} />
-					<Route exact path='/address' element={<UserAddress />} />
+					<Route path='/' element={<Main />} />
+					<Route path='/info' element={<UserInfo />} />
+					<Route path='/address' element={<UserAddress />} />
 				</Routes>
 			</div>
 			<ReactQueryDevtools />
